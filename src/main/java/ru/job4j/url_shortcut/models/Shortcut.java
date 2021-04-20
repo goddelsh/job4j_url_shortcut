@@ -12,12 +12,13 @@ public class Shortcut {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name="full")
+    @Column(name="full_url")
     private String fullUrl;
-    @Column(name="short")
+    @Column(name="short_url")
     private String shortUrl;
-    private Date created;
-    @Column(name="called")
+    @Column(name="created_date")
+    private Date createdDate;
+    @Column(name="called_times")
     private int calledTimes;
 
     @ManyToOne
