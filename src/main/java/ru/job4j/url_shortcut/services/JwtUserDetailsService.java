@@ -1,4 +1,4 @@
-package ru.job4j.url_shortcut.config;
+package ru.job4j.url_shortcut.services;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.job4j.url_shortcut.models.Account;
+import ru.job4j.url_shortcut.models.RegistrationResponse;
 import ru.job4j.url_shortcut.services.AuthService;
 import ru.job4j.url_shortcut.services.RegistrationService;
 
@@ -27,12 +28,15 @@ public class AuthController {
     }
 
     @RequestMapping("/registration")
-    public ResponseEntity<Account> reg (@RequestBody Map<String, String> req) {
-        var result = new Account();
+    public ResponseEntity<RegistrationResponse> reg (@RequestBody Map<String, String> req) {
+        var result = new RegistrationResponse();
         if (req.get("site") != null) {
-            result = registrationService.regSite(req.get("site"));
+            var account = registrationService.regSite(req.get("site"));
+            result.setRegistration(true);
+            result.setLogin(account.getLogin());
+            result.setPassword(account.getPassword());
         }
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        return ResponseEntity.ok(result);
     }
 
     @RequestMapping("/auth")
@@ -41,6 +45,6 @@ public class AuthController {
         if (req.get("login") != null && req.get("password") != null ) {
             result.put("token", authService.getToken(req.get("login"), req.get("password")));
         }
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        return ResponseEntity.ok(result);
     }
 }

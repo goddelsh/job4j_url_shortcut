@@ -8,6 +8,7 @@ import ru.job4j.url_shortcut.models.StatisticResponse;
 import ru.job4j.url_shortcut.services.InfoService;
 import ru.job4j.url_shortcut.services.RegistrationService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +26,13 @@ public class RegController {
 
 
     @PostMapping("/convert")
-    public ResponseEntity<Shortcut> convert(@RequestBody Map<String, String> req,
+    public ResponseEntity<Map<String, String>> convert(@RequestBody Map<String, String> req,
                                             @AuthenticationPrincipal String user) {
-        var result = registrationService.getShortcut(req.get("url"), user);
+        var result = new HashMap<String, String>();
+        var shortcut = registrationService.getShortcut(req.get("url"), user);
+        if(shortcut != null) {
+            result.put("code", shortcut.getShortUrl());
+        }
         return ResponseEntity.ok(result);
     }
 
