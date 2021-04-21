@@ -5,23 +5,24 @@ import org.apache.commons.text.RandomStringGenerator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.job4j.url_shortcut.models.Account;
-import ru.job4j.url_shortcut.models.Site;
+import ru.job4j.url_shortcut.models.Shortcut;
 import ru.job4j.url_shortcut.repositories.AccountRepository;
 import ru.job4j.url_shortcut.repositories.ShortcutRepository;
-import ru.job4j.url_shortcut.repositories.SiteRepository;
+
+import java.util.Date;
 
 @Service
 public class RegistrationService {
 
-    final private SiteRepository siteRepository;
+   // final private SiteRepository siteRepository;
     final private AccountRepository accountRepository;
     final private ShortcutRepository shortcutRepository;
     final private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public RegistrationService(SiteRepository siteRepository,
+    public RegistrationService(//SiteRepository siteRepository,
                                AccountRepository accountRepository,
                                ShortcutRepository shortcutRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.siteRepository = siteRepository;
+      //  this.siteRepository = siteRepository;
         this.accountRepository = accountRepository;
         this.shortcutRepository = shortcutRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -34,21 +35,29 @@ public class RegistrationService {
         var passwd = generateRandomSpecialCharacters(4);
         account.setLogin("user" + lastAccountId);
         account.setPassword(bCryptPasswordEncoder.encode(passwd));
+        account.setSite(url);
         accountRepository.save(account);
-
-        var site = new Site();
-        site.setName(url);
-        site.setAccount(account);
-
-        siteRepository.save(site);
 
         account.setPassword(passwd);
         return account;
 
     }
 
+    public Shortcut getShortcut(String url, String login) {
+        var result = new Shortcut();
+        var account = this.accountRepository.findByLogin(login);
+        if (account != null) {
+            result.setFullUrl(url);
+            result.setShortUrl(generateRandomSpecialCharacters(8));
+            result.setCreatedDate(new Date());
+            result.setAccount(account);
+            result = this.shortcutRepository.save(result);
+        }
+        return result;
+    }
+
     public String generateRandomSpecialCharacters(int length) {
-        RandomStringGenerator pwdGenerator = new RandomStringGenerator.Builder().withinRange(33, 45)
+        RandomStringGenerator pwdGenerator = new RandomStringGenerator.Builder().withinRange('a', 'z')
                 .build();
         return pwdGenerator.generate(length);
     }

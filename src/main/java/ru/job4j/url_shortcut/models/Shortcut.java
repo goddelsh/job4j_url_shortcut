@@ -22,5 +22,5 @@ public class Shortcut {
     private int calledTimes;
 
     @ManyToOne
-    private Site site;
+    private Account account;
 }

@@ -13,6 +13,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String site;
     private String login;
     private String password;
 }
