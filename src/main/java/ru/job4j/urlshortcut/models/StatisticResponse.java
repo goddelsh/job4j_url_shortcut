@@ -1,4 +1,4 @@
-package ru.job4j.url_shortcut.models;
+package ru.job4j.urlshortcut.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

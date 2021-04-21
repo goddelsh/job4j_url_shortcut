@@ -1,13 +1,11 @@
-package ru.job4j.url_shortcut.models;
+package ru.job4j.urlshortcut.models;
 
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(name="accounts")
+@Table(name = "accounts")
 @Data
 public class Account {
     @Id

@@ -1,12 +1,11 @@
-package ru.job4j.url_shortcut.controllers;
+package ru.job4j.urlshortcut.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import ru.job4j.url_shortcut.models.Shortcut;
-import ru.job4j.url_shortcut.models.StatisticResponse;
-import ru.job4j.url_shortcut.services.InfoService;
-import ru.job4j.url_shortcut.services.RegistrationService;
+import ru.job4j.urlshortcut.models.StatisticResponse;
+import ru.job4j.urlshortcut.services.InfoService;
+import ru.job4j.urlshortcut.services.RegistrationService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +29,7 @@ public class RegController {
                                             @AuthenticationPrincipal String user) {
         var result = new HashMap<String, String>();
         var shortcut = registrationService.getShortcut(req.get("url"), user);
-        if(shortcut != null) {
+        if (shortcut != null) {
             result.put("code", shortcut.getShortUrl());
         }
         return ResponseEntity.ok(result);
@@ -39,7 +38,7 @@ public class RegController {
     @GetMapping("/redirect/{id}")
     public String redirect(@PathVariable String id) {
         var result = infoService.getFullUrl(id);
-        return "redirect:" + (result != null ? result : "/") ;
+        return "redirect:" + (result != null ? result : "/");
     }
 
     @GetMapping("/statistic")

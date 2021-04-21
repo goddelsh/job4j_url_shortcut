@@ -1,4 +1,4 @@
-package ru.job4j.url_shortcut.services;
+package ru.job4j.urlshortcut.services;
 
 import com.auth0.jwt.JWT;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-import static ru.job4j.url_shortcut.config.JwtRequestFilter.EXPIRATION_TIME;
-import static ru.job4j.url_shortcut.config.JwtRequestFilter.SECRET;
+import static ru.job4j.urlshortcut.config.JwtRequestFilter.EXPIRATION_TIME;
+import static ru.job4j.urlshortcut.config.JwtRequestFilter.SECRET;
 
 @Service
 public class AuthService {

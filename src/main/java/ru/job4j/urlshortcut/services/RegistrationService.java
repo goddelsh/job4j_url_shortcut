@@ -1,13 +1,13 @@
-package ru.job4j.url_shortcut.services;
+package ru.job4j.urlshortcut.services;
 
 
 import org.apache.commons.text.RandomStringGenerator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.job4j.url_shortcut.models.Account;
-import ru.job4j.url_shortcut.models.Shortcut;
-import ru.job4j.url_shortcut.repositories.AccountRepository;
-import ru.job4j.url_shortcut.repositories.ShortcutRepository;
+import ru.job4j.urlshortcut.models.Account;
+import ru.job4j.urlshortcut.models.Shortcut;
+import ru.job4j.urlshortcut.repositories.AccountRepository;
+import ru.job4j.urlshortcut.repositories.ShortcutRepository;
 
 import java.util.Date;
 

@@ -1,11 +1,11 @@
-package ru.job4j.url_shortcut.services;
+package ru.job4j.urlshortcut.services;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.job4j.url_shortcut.models.Account;
-import ru.job4j.url_shortcut.repositories.AccountRepository;
+import ru.job4j.urlshortcut.models.Account;
+import ru.job4j.urlshortcut.repositories.AccountRepository;
 
 import java.util.ArrayList;
 

@@ -1,14 +1,13 @@
-package ru.job4j.url_shortcut.services;
+package ru.job4j.urlshortcut.services;
 
 
 import org.springframework.stereotype.Service;
-import ru.job4j.url_shortcut.models.StatisticResponse;
-import ru.job4j.url_shortcut.repositories.AccountRepository;
-import ru.job4j.url_shortcut.repositories.ShortcutRepository;
+import ru.job4j.urlshortcut.models.StatisticResponse;
+import ru.job4j.urlshortcut.repositories.AccountRepository;
+import ru.job4j.urlshortcut.repositories.ShortcutRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,7 +36,7 @@ public class InfoService {
     public List<StatisticResponse> getStatistic(String user) {
         List<StatisticResponse> result = new ArrayList<>();
         var acount = accountRepository.findByLogin(user);
-        if(acount != null) {
+        if (acount != null) {
             result = shortcutRepository.findByAccountId(acount.getId())
                     .stream()
                     .map(el -> new StatisticResponse(el.getFullUrl(), el.getCalledTimes()))
