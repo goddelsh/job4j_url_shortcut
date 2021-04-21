@@ -2,8 +2,14 @@ package ru.job4j.url_shortcut.services;
 
 
 import org.springframework.stereotype.Service;
+import ru.job4j.url_shortcut.models.StatisticResponse;
 import ru.job4j.url_shortcut.repositories.AccountRepository;
 import ru.job4j.url_shortcut.repositories.ShortcutRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class InfoService {
@@ -24,6 +30,18 @@ public class InfoService {
             shortcut.setCalledTimes(shortcut.getCalledTimes() + 1);
             shortcutRepository.save(shortcut);
             result = shortcut.getFullUrl();
+        }
+        return result;
+    }
+
+    public List<StatisticResponse> getStatistic(String user) {
+        List<StatisticResponse> result = new ArrayList<>();
+        var acount = accountRepository.findByLogin(user);
+        if(acount != null) {
+            result = shortcutRepository.findByAccountId(acount.getId())
+                    .stream()
+                    .map(el -> new StatisticResponse(el.getFullUrl(), el.getCalledTimes()))
+                    .collect(Collectors.toList());
         }
         return result;
     }

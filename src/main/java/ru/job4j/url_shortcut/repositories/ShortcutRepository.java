@@ -11,4 +11,6 @@ public interface ShortcutRepository extends CrudRepository<Shortcut, Integer> {
 
     @Query("select s from #{#entityName} s where s.shortUrl = ?1")
     Optional<Shortcut> findByShortUrl(String shortUrl);
+
+    List<Shortcut> findByAccountId(Integer account_id);
 }

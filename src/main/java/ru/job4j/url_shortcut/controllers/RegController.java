@@ -4,9 +4,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.url_shortcut.models.Shortcut;
+import ru.job4j.url_shortcut.models.StatisticResponse;
 import ru.job4j.url_shortcut.services.InfoService;
 import ru.job4j.url_shortcut.services.RegistrationService;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -33,5 +35,11 @@ public class RegController {
     public String redirect(@PathVariable String id) {
         var result = infoService.getFullUrl(id);
         return "redirect:" + (result != null ? result : "/") ;
+    }
+
+    @GetMapping("/statistic")
+    public List<StatisticResponse> statistic(@AuthenticationPrincipal String user) {
+        var result = infoService.getStatistic(user);
+        return result;
     }
 }
