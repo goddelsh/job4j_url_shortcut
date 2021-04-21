@@ -6,6 +6,7 @@ create table accounts (
 
 create table sites (
    id serial primary key not null,
+   name varchar(2000) not null,
    account_id integer not null references accounts(id)
 );
 

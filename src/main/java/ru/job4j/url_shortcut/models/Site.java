@@ -15,8 +15,7 @@ public class Site {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany
-    private Set<Shortcut> shortcuts = new HashSet<>();
+    private String name;
 
     @ManyToOne
     private Account account;

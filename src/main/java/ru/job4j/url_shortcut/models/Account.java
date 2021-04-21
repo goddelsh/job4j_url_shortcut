@@ -15,7 +15,4 @@ public class Account {
     private Integer id;
     private String login;
     private String password;
-    @OneToMany
-    private Set<Site> site = new HashSet<>();
-
 }

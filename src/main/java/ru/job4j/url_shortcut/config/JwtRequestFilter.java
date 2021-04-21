@@ -21,6 +21,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
     public static final String SECRET = "SecretKeyToGenJWTs";
+    public static final long EXPIRATION_TIME = 864_000_000; /* 10 days */
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
