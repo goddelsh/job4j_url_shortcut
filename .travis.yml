@@ -1,0 +1,26 @@
+
+language: java
+jdk:
+  - openjdk11
+
+sudo: false
+
+services:
+  - postgresql
+
+before_install:
+  - psql -c 'create database urlshort;' -U postgres
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    recipients:
+      -ataraveski@gmail.com
+    on_success: never
+    on_failure: always
+
+env:
+   global:
+    - CODECOV_TOKEN="78fc3c00-9d8a-4073-93c9-1eedfcb31ac6"
