@@ -1,5 +1,6 @@
 package ru.job4j.urlshortcut.repositories;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import ru.job4j.urlshortcut.models.Shortcut;
@@ -13,4 +14,8 @@ public interface ShortcutRepository extends CrudRepository<Shortcut, Integer> {
     Optional<Shortcut> findByShortUrl(String shortUrl);
 
     List<Shortcut> findByAccountId(Integer accountId);
+
+    @Modifying
+    @Query("update #{#entityName} s set s.calledTimes = s.calledTimes + 1 where s.shortUrl = ?1")
+    void incrementCallsStatistic(String shortUrl);
 }

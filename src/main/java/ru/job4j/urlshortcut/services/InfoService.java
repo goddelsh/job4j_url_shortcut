@@ -2,6 +2,7 @@ package ru.job4j.urlshortcut.services;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.urlshortcut.models.StatisticResponse;
 import ru.job4j.urlshortcut.repositories.AccountRepository;
 import ru.job4j.urlshortcut.repositories.ShortcutRepository;
@@ -22,12 +23,12 @@ public class InfoService {
         this.accountRepository = accountRepository;
     }
 
+    @Transactional
     public String getFullUrl(String shortUrl) {
         String result = null;
         var shortcut = shortcutRepository.findByShortUrl(shortUrl).orElse(null);
         if (shortcut != null) {
-            shortcut.setCalledTimes(shortcut.getCalledTimes() + 1);
-            shortcutRepository.save(shortcut);
+            shortcutRepository.incrementCallsStatistic(shortUrl);
             result = shortcut.getFullUrl();
         }
         return result;
